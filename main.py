@@ -30,7 +30,7 @@ class Games():
     while guessCount < 5:
       Games.loading(f"You have {5 - guessCount} guesses remaining...")
       userInput = int(input("What's your guess? "))
-      if userInput > 50 or userInput < 1:
+      if userInput > 20 or userInput < 1:
         Games.loading("Please provide a number between 1 and 20...")
       else:
         if userInput == randomNum:
