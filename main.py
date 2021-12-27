@@ -14,7 +14,7 @@ def loading(text):
 
 class Games():
     '''
-    The games class creates an object capable of two games: dice roll and
+    The games class creates an class capable of two games: dice roll and
     guess the number
     '''
     @staticmethod
