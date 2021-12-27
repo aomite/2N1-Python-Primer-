@@ -72,4 +72,4 @@ while gameOn:
     Games.loading("Exiting...")
     gameOn = False
   elif user_resp < 0 or user_resp >= 3:
-    Games.loading("Please select 1 or 0")
+    Games.loading("Please select 1, 2 or 0")
