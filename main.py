@@ -1,62 +1,85 @@
+'''
+Main.py has two games that users can choose from and play. The first is
+dice roll and the second is guess the number. Enjoy!
+'''
 import random
-numOfGuesses = 1
-getRandNum = random.randint(1,100)
-#print(getRandNum)
+import time
 
-#2N1 - Dice Roll Simulator
-def dice_roll():
-  rand_num = random.randint(1,6)
-  print(f"Dice 1: {rand_num}\n")
-  rand_num2 = random.randint(1,6)
-  print(f"Dice 2: {rand_num2}\n")
-  print(f"Roll total: {rand_num + rand_num2}\n")
+def loading(text):
+    '''
+    Loads text with a one second delay!
+    '''
+    print(text)
+    time.sleep(1)
+
+class Games():
+    '''
+    The games class creates an class capable of two games: dice roll and
+    guess the number
+    '''
+    @staticmethod
+    def dice_roll():
+        '''
+        Game #1: Dice Roll!
+        '''
+        loading("Rolling Dice 1...")
+        rand_num = random.randint(1,6)
+        print(f"Dice 1: {rand_num}\n")
+
+        loading("Rolling Dice 2...")
+        rand_num2 = random.randint(1,6)
+        print(f"Dice 2: {rand_num2}\n")
+
+        loading("Calculating total...")
+        total = rand_num + rand_num2
+        print(f"Roll total: {total}\n")
+        loading("...")
+        return total
+
+    @staticmethod
+    def guess_number():
+        '''
+        Game #2: Guess the number!
+        '''
+        loading("Choosing a random number between 1 and 20...")
+        random_num = random.randint(1, 20)
+        guess_count = 0
+
+        while guess_count < 5:
+            loading(f"You have {5 - guess_count} guesses remaining...")
+            user_input = int(input("What's your guess? "))
+            if user_input > 20 or user_input < 1:
+                loading("Please provide a number between 1 and 20...")
+            else:
+                if user_input != random_num:
+                    loading("You guess is wrong! Please try again")
+                    guess_count += 1
+                else:
+                    loading(f"You guessed CORRECT! The number was {random_num}")
+                    return random_num
+        loading("You have used all your guesses. Better luck next time!")
+        return random_num
+# end class
 
 
-#2N1 - Number guesser
-def guess_tracker(nog):
-  global numOfGuesses
-  global getRandNum
-  if nog == 5:
-    print("Aww, perhaps you'll guess it next time.\n")
-  else:
-    print(f"You have {5 - nog} guesses remaining")
+# CLI MENU
+GAME_ON = True
 
-def number_guesser():
-  global numOfGuesses
-  userNum = int(input("What's your guess? "))
-  if(userNum < 0):
-    userNum = abs(userNum)
-  elif(userNum == 0):
-    print("Please limit your guess between 1 and 100.")
-    number_guesser()
-  elif(userNum >= 100):
-    print("Please limit your guess between 1 and 100.")
-    number_guesser()
-    
-  if(userNum == getRandNum):
-    print("Congrats! You guessed correctly!")
-  elif(userNum > getRandNum):
-    print("You guessed too high.")
-    guess_tracker(numOfGuesses)
-    numOfGuesses += 1
-    number_guesser()
-  elif(userNum < getRandNum): 
-    print("You guessed too low")
-    guess_tracker(numOfGuesses)
-    numOfGuesses += 1
-    number_guesser()
+while GAME_ON:
 
+    #User Interface
+    print("Welcome to 2N1. \n")
+    print("Press [1] for a dice roll.\n")
+    print("Press [2] for the Number Guess game.\n")
+    print("Press [0] to exit")
 
-#2N1 - User Interface
-print("Welcome to 2N1. \n")
-print("Press [1] for a dice roll.\n")
-print("Press [2] for the Number Guess game.\n")
-
-user_resp = int(input("Which would you like to select? "))
-if user_resp == 1:
-  dice_roll()
-elif user_resp == 2:
-  print("Welcome to Number Guesser. A number between 1 and 100 has been selected. Try to guess the number in 5 turns or fewer. Good luck! ;) \n")
-  number_guesser()
-elif user_resp <= 0 or user_resp >= 3:
-  print("Please select 1 or 2")
+    user_resp = int(input("Which would you like to select? "))
+    if user_resp == 1:
+        Games.dice_roll()
+    elif user_resp == 2:
+        Games.guess_number()
+    elif user_resp == 0:
+        loading("Exiting...")
+        GAME_ON = False
+    elif user_resp < 0 or user_resp >= 3:
+        loading("Please select 1, 2 or 0")
