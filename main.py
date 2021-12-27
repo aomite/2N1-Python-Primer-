@@ -5,12 +5,14 @@ dice roll and the second is guess the number. Enjoy!
 import random
 import time
 
+
 def loading(text):
     '''
     Loads text with a one second delay!
     '''
     print(text)
     time.sleep(1)
+
 
 class Games():
     '''
@@ -23,11 +25,11 @@ class Games():
         Game #1: Dice Roll!
         '''
         loading("Rolling Dice 1...")
-        rand_num = random.randint(1,6)
+        rand_num = random.randint(1, 6)
         print(f"Dice 1: {rand_num}\n")
 
         loading("Rolling Dice 2...")
-        rand_num2 = random.randint(1,6)
+        rand_num2 = random.randint(1, 6)
         print(f"Dice 2: {rand_num2}\n")
 
         loading("Calculating total...")
@@ -55,7 +57,7 @@ class Games():
                     loading("You guess is wrong! Please try again")
                     guess_count += 1
                 else:
-                    loading(f"You guessed CORRECT! The number was {random_num}")
+                    loading(f"CORRECT! The number was {random_num}")
                     return random_num
         loading("You have used all your guesses. Better luck next time!")
         return random_num
@@ -67,7 +69,7 @@ GAME_ON = True
 
 while GAME_ON:
 
-    #User Interface
+    # User Interface
     print("Welcome to 2N1. \n")
     print("Press [1] for a dice roll.\n")
     print("Press [2] for the Number Guess game.\n")
