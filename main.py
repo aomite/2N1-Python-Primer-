@@ -14,12 +14,16 @@ def dice_roll():
 
 #2N1 - Number guesser
 def guess_tracker(nog):
+  #Checks if win condition is satisfied then restarts game
   global numOfGuesses
   global getRandNum
   if nog == 5:
     print("Aww, perhaps you'll guess it next time.\n")
+    numOfGuesses = 1
+    getRandNum = getRandNum = random.randint(1,100)
+    print("A new number between 1 and 100 has been selected.\n")
   else:
-    print(f"You have {5 - nog} guesses remaining")
+    print(f"You have {5 - nog} guesses remaining.\n")
 
 def number_guesser():
   global numOfGuesses
